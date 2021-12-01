@@ -3,7 +3,7 @@ from time import sleep
 import sys
 
 #assign GPIO pins for motor
-motor_channel = (5, 17,27,22)  
+motor_channel = (29,31,33,35)  
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 #for defining more than 1 GPIO channel as input/output use
@@ -33,3 +33,13 @@ while True:
             sleep(0.02)
             GPIO.output(motor_channel, (GPIO.HIGH,GPIO.HIGH,GPIO.LOW,GPIO.LOW))
             sleep(0.02)
+
+            
+    #press ctrl+c for keyboard interrupt
+    except KeyboardInterrupt:
+        #query for setting motor direction or exit
+        motor_direction = input('select motor direction a=anticlockwise, c=clockwise or q=exit: ')
+        #check for exit
+        if(motor_direction == 'q'):
+            print('motor stopped')
+            sys.exit(0)
