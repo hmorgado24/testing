@@ -14,16 +14,16 @@ while 1:                               # execute loop forever
     IO.output(5,1)                 # Step1 go high
     IO.output(22,0)
     for y in range(x):             # sleep for  x*100msec
-        time.sleep(0.1)
+        time.sleep(0.001)
     IO.output(17,1)               # step2 go high
     IO.output(5,0)
     for y in range(x):
-        time.sleep(0.1)         # sleep for  x*100msec
+        time.sleep(0.001)         # sleep for  x*100msec
     IO.output(27,1)              #step 3 go high
     IO.output(17,0)
     for y in range(x):
-        time.sleep(0.1)         # sleep for  x*100msec
+        time.sleep(0.001)         # sleep for  x*100msec
     IO.output(22,1)              #step 4 go high
     IO.output(27,0)
     for y in range(x):
-        time.sleep(0.1)                           # sleep for  x*100msec
+        time.sleep(0.001)                           # sleep for  x*100msec
