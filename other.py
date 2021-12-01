@@ -3,12 +3,11 @@ from time import sleep
 import sys
 
 #assign GPIO pins for motor
-motor_channel = (5,17,27,22)
+motor_channel = (20,17,27,22)
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 #for defining more than 1 GPIO channel as input/output use
 GPIO.setup(motor_channel, GPIO.OUT)
-
 motor_direction = input('select motor direction a=anticlockwise, c=clockwise: ')
 while True:
     try:
