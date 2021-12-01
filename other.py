@@ -1,29 +1,35 @@
+import RPi.GPIO as GPIO
+from time import sleep
+import sys
 
-import RPi.GPIO as IO         # we are calling for header file which helps us use GPIO’s of PI
-import time                            # we are calling for time to provide delays in program
-IO.setwarnings(False)           # do not show any warnings
-x=1                                         # integer for storing the delay multiple
-IO.setmode (IO.BCM)
-IO.setup(5,IO.OUT)             # initialize GPIO5 as an output.
-IO.setup(17,IO.OUT)
-IO.setup(27,IO.OUT)
-IO.setup(22,IO.OUT)
-IO.setup(19,IO.IN)              # initialize GPIO19 as an input.
-IO.setup(26,IO.IN) 
-while 1:                               # execute loop forever
-    IO.output(5,1)                 # Step1 go high
-    IO.output(22,0)
-    for y in range(x):             # sleep for  x*100msec
-        time.sleep(0.001)
-    IO.output(17,1)               # step2 go high
-    IO.output(5,0)
-    for y in range(x):
-        time.sleep(0.001)         # sleep for  x*100msec
-    IO.output(27,1)              #step 3 go high
-    IO.output(17,0)
-    for y in range(x):
-        time.sleep(0.001)         # sleep for  x*100msec
-    IO.output(22,1)              #step 4 go high
-    IO.output(27,0)
-    for y in range(x):
-        time.sleep(0.001)                           # sleep for  x*100msec
+#assign GPIO pins for motor
+motor_channel = (5, 17,27,22)  
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+#for defining more than 1 GPIO channel as input/output use
+GPIO.setup(motor_channel, GPIO.OUT)
+
+motor_direction = input('select motor direction a=anticlockwise, c=clockwise: ')
+while True:
+    try:
+        if(motor_direction == 'c'):
+            print('motor running clockwise\n')
+            GPIO.output(motor_channel, (GPIO.HIGH,GPIO.LOW,GPIO.LOW,GPIO.HIGH))
+            sleep(0.02)
+            GPIO.output(motor_channel, (GPIO.HIGH,GPIO.HIGH,GPIO.LOW,GPIO.LOW))
+            sleep(0.02)
+            GPIO.output(motor_channel, (GPIO.LOW,GPIO.HIGH,GPIO.HIGH,GPIO.LOW))
+            sleep(0.02)
+            GPIO.output(motor_channel, (GPIO.LOW,GPIO.LOW,GPIO.HIGH,GPIO.HIGH))
+            sleep(0.02)
+
+        elif(motor_direction == 'a'):
+            print('motor running anti-clockwise\n')
+            GPIO.output(motor_channel, (GPIO.HIGH,GPIO.LOW,GPIO.LOW,GPIO.HIGH))
+            sleep(0.02)
+            GPIO.output(motor_channel, (GPIO.LOW,GPIO.LOW,GPIO.HIGH,GPIO.HIGH))
+            sleep(0.02)
+            GPIO.output(motor_channel, (GPIO.LOW,GPIO.HIGH,GPIO.HIGH,GPIO.LOW))
+            sleep(0.02)
+            GPIO.output(motor_channel, (GPIO.HIGH,GPIO.HIGH,GPIO.LOW,GPIO.LOW))
+            sleep(0.02)
